@@ -17,6 +17,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto" rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
 
     <!-- Vendor CSS Files -->
     <link href="{{ url_for('static',filename='bootstrap.min.css')}}" rel="stylesheet">
@@ -173,19 +174,52 @@
                     <h2>Execution</h2>
                     <p>Sentiment Analyzer</p>
                 </header>
-                <div class="form-group" align="center">
-                    <label for="exampleInputEmail1">Enter text to Analyze</label>
+                <h3 align="center">Results for Twitter username @{{ username }}</h3>
+                <section>
+                  <div class="container2">
+                    <div class="child">
+                      <table class="table table-hover" width="60%">
+                        <tr>
+                          <th>Negative</th>
+                          <td>{{ result.neg }}</td>
+                        </tr>
+                        <tr>
+                          <th>Positive</th>
+                          <td>{{ result.pos }}</td>
+                        </tr>
+                        <tr>
+                          <th>Neutral</th>
+                          <td>{{ result.neut }}</td>
+                        </tr>
+                      </table>
+                    </div>
                     <br>
                     <br>
-                    <form action="{{ url_for('predict')}}" method="POST">
-                        <textarea name="Tweet" placeholder="Enter here" rows="4" cols="50"></textarea>
-                        <br>
-                        <br>
-                        <input type="submit" value="Analyse" class="btn btn-primary btn-sm" id="sub">
-                    </form>
-                </div>
-            </div>
+                    <div class="child">
+                      <div class="ct-chart ct-perfect-fourth"></div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                <section id ="bor">
+                    <div class="container">
+                        <h2 align="center">Negative tweets</h2>
+                        {% for tweet in result.negative_tweets %}
+                            <p>{{ tweet }}</p>
+                        {% endfor %}
 
+                        <h2 align="center">Positive tweets</h2>
+                        {% for tweet in result.positive_tweets %}
+                            <p>{{ tweet }}</p>
+                        {% endfor %}
+
+                        <h2 align="center">Neutral tweets</h2>
+                        {% for tweet in result.neutral_tweets %}
+                            <p>{{ tweet }}</p>
+                        {% endfor %}
+                    </div>
+                </section>
+            </div>
         </section>
         <!-- End Services Section -->
 
@@ -803,6 +837,37 @@
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
+    <!-- Vendor JS Files -->
+    <script src="{{ url_for('static',filename='bootstrap.bundle.js')}}"></script>
+    <script src="{{ url_for('static',filename='aos.js')}}"></script>
+    <script src="{{ url_for('static',filename='swiper-bundle.min.js')}}"></script>
+    <script src="{{ url_for('static',filename='purecounter.js')}}"></script>
+    <script src="{{ url_for('static',filename='isotope.pkgd.min.js')}}"></script>
+    <script src="{{ url_for('static',filename='glightbox.min.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <script>
+      var data = {
+        // A labels array that can contain any sort of values
+        labels: ['Negative', 'Positive', 'Neutral'],
+        // Our series array that contains series objects or in this case series data arrays
+        series: [
+          {{ result.neg }}, {{ result.pos }}, {{ result.neut }}
+        ]
+      };
+      // Create a new line chart object where as first parameter we pass in a selector
+      // that is resolving to our chart container element. The Second parameter
+      // is the actual data object.
+      // new Chartist.Line('.ct-chart', data);
+      var sum = function(a, b) { return a + b };
+      new Chartist.Pie('.ct-chart', data, {
+      //   labelInterpolationFnc: function(value) {
+      //     return Math.round(value / data.series.reduce(sum) * 100) + '%';
+      //   }
+      });
+    </script>
+
     <script>
     function jumpToHash(hash){
         if (hash){
@@ -812,14 +877,6 @@
     }
     jumpToHash({{ anchor }});
     </script>
-    <!-- Vendor JS Files -->
-    <script src="{{ url_for('static',filename='bootstrap.bundle.js')}}"></script>
-    <script src="{{ url_for('static',filename='aos.js')}}"></script>
-    <script src="{{ url_for('static',filename='swiper-bundle.min.js')}}"></script>
-    <script src="{{ url_for('static',filename='purecounter.js')}}"></script>
-    <script src="{{ url_for('static',filename='isotope.pkgd.min.js')}}"></script>
-    <script src="{{ url_for('static',filename='glightbox.min.js')}}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Template Main JS File -->
     <script src="{{ url_for('static',filename='main.js')}}"></script>

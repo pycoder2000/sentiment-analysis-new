@@ -16,7 +16,9 @@
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto" rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
 
     <!-- Vendor CSS Files -->
     <link href="{{ url_for('static',filename='bootstrap.min.css')}}" rel="stylesheet">
@@ -174,14 +176,11 @@
                     <p>Sentiment Analyzer</p>
                 </header>
                 <div class="form-group" align="center">
-                    <label for="exampleInputEmail1">Enter text to Analyze</label>
-                    <br>
-                    <br>
-                    <form action="{{ url_for('predict')}}" method="POST">
-                        <textarea name="Tweet" placeholder="Enter here" rows="4" cols="50"></textarea>
+                    <form action="{{ url_for('newroot') }}" method="POST">
+                        <h3>Put in your Twitter username:</h3>
                         <br>
-                        <br>
-                        <input type="submit" value="Analyse" class="btn btn-primary btn-sm" id="sub">
+                        <input type="text" id="twitter_username" name="twitter_username" />&nbsp;
+                        <button class="buttonsubmit" type="submit" name="action">Submit</button>
                     </form>
                 </div>
             </div>
@@ -820,6 +819,9 @@
     <script src="{{ url_for('static',filename='isotope.pkgd.min.js')}}"></script>
     <script src="{{ url_for('static',filename='glightbox.min.js')}}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
 
     <!-- Template Main JS File -->
     <script src="{{ url_for('static',filename='main.js')}}"></script>

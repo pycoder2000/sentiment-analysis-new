@@ -20,9 +20,70 @@
     font-size: 30px;
 }
 
+.buttonsubmit {
+    display: inline-block;
+    padding: 0.50rem 1.25rem;
+    border-radius: 10rem;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 1rem;
+    letter-spacing: 0.15rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    border-color: #fff;
+    z-index: 1;
+}
+
+.buttonsubmit:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0cf;
+    z-index: -2;
+}
+
+.buttonsubmit:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: #008fb3;
+    transition: all 0.3s;
+    z-index: -1;
+}
+
+.buttonsubmit:hover {
+    color: #fff;
+}
+
+.buttonsubmit:hover:before {
+    width: 100%;
+}
+
+.left {
+    width: 70%;
+    float: left;
+}
+
+.right {
+    width: 30%;
+}
+
 body {
     font-family: "Open Sans", sans-serif;
     color: #444444;
+}
+
+.ct-label {
+    fill: rgba(255, 255, 255, 0.8);
+    font-size: 18px;
+    vertical-align: middle;
 }
 
 .tweet1 {
@@ -106,6 +167,17 @@ body {
     overflow: hidden;
     background-color: #ffffff;
     border-top: 3px solid #1DA1F2;
+}
+
+.container2 {
+    overflow: hidden;
+    border-top: 3px solid #1DA1F2;
+    margin: 1rem;
+    text-align: center;
+}
+
+.child {
+    vertical-align: middle;
 }
 
 .t {
